@@ -1,14 +1,13 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component } from 'react';
 
 import update from 'immutability-helper';
 
-import Panel from '../components/Panel';
-import TextBox from '../components/TextBox';
-import CheckBox from '../components/CheckBox';
-import Select from '../components/Select';
-import Button from '../components/Button';
+import Panel from '../platform/Panel';
+import CheckBox from '../platform/CheckBox';
 
 import _ from '../mocks/i18next';
+
+import EditUserForm from './components/EditUserForm';
 
 const userTemplate = {
 	givenName: 	"",
@@ -41,107 +40,31 @@ export default class App extends Component {
 
 		return <div>
 			{ users.map((user, i) => {
-				const hasNotificationEmail = user.hasNotificationEmail;
-
-				return <Panel
+				return <EditUserForm
 					key = { user.id }
-					id = { user.id }
-					title = { _("Specify New User")}
-				>
-					<TextBox
-						label = { _("First Name") }
-						placeholder={ _("e.g.: John") }
-						value = { user.givenName }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { givenName: { $set: e.target.value } } })
-							});
-						} }
-					/>
-					<TextBox
-						label = { _("Last Name") }
-						placeholder={ _("e.g.: Smith") }
-						value = { user.familyName }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { familyName: { $set: e.target.value } } })
-							});
-						} }
-					/>
-					<Select
-						label = { _("Role Name") }
-						placeholder={ _("e.g.: John") }
-						options = {[
-							{ label: "User", value: "User" },
-							{ label: "Admin", value: "Admin" }
-						]}
-						value = { user.type }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { type: { $set: e.target.value } } })
-							});
-						} }
-					/>
-					<TextBox
-						label={ hasNotificationEmail ? _("Email Name") :_("Email (To Sign In)")  }
-						placeholder={ _("e.g.: John") }
-						description={
-							hasNotificationEmail
-								? _("This email address will be used to sign in and receive notifications.")
-								: _("You'll use it to sign in.")
-						}
-						value = { user.login }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { login: { $set: e.target.value } } })
-							});
-						} }
-					/>
-					{ hasNotificationEmail && <TextBox
-						description = { _("We'll use this email for account and system updates.") }
-						label = { _("Notification Email") }
-						value = { user.notificationEmail }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { notificationEmail: { $set: e.target.value } } })
-							});
-						} }
-					/> }
-					<CheckBox
-						description = { _("Use different emails to sign in and receive notifications.") }
-						checked = { user.hasNotificationEmail }
-						onChange = { (e) => {
-							const idx = users.findIndex(item => item.id === user.id);
-							self.setState({
-								'users': update(users, { [idx]: { hasNotificationEmail: { $set: e.target.value } } })
-							});
-						} }
-					/>
-					{ i+1 === users.length && <Button
-						bsStyle = "primary"
-						label = { _("On More User") }
-						onClick = { () => {
-							self.setState({
-								'users': update(users, { $push: [
+					user = {user}
+					needRemove = { users.length !== 1 }
+					needAdd = { i+1 === users.length }
+					onRemoveUser = { () => {
+						self.setState({
+							'users': update(users, { $splice: [[i, 1]]})
+						});
+					} }
+					onAddUser = { () => {
+						self.setState({
+							'users': update(users, { $push: [
 									Object.assign({ id: users.length }, userTemplate)
 								]})
-							});
-						}}
-					/> }
-					{ users.length !== 1 && <Button
-						label = { _("Remove User") }
-						onClick = { () => {
-							self.setState({
-								'users': update(users, { $splice: [[i, 1]]})
-							});
-						}}
-					/> }
-				</Panel>
+						});
+					} }
+					onUserChange = { (user) => {
+						const idx = users.findIndex(item => item.id === user.id);
+
+						self.setState({
+							'users': update(users, { [idx]: { $set: user } })
+						});
+					} }
+				/>;
 			}) }
 			<Panel title = { _("Assign Services To New User") }>
 				{ wizardState.map((serviceItem, i) => {
