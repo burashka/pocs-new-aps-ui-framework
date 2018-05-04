@@ -24,10 +24,10 @@ function getStatus(user) {
 				console.warn("[ERROR] UserStatus cant resolve user services status: they were not loaded to model");
 			} else
 			if (user.services.some(function(service) {
-				return	"aps:updating" == service.aps.status ||
-					"aps:deleting" == service.aps.status ||
-					"aps:provisioning" == service.aps.status ||
-					"aps:configuring" == service.aps.status;
+				return	"aps:updating" === service.aps.status ||
+					"aps:deleting" === service.aps.status ||
+					"aps:provisioning" === service.aps.status ||
+					"aps:configuring" === service.aps.status;
 			})) {
 				return "configuringServices";
 			}
@@ -64,18 +64,17 @@ export default class UserView extends Component {
 		};
 	}
 
-	componentWillMount(){
+	async componentDidMount(){
 		const { vars: {selectedUser}, user } = this.props.context;
 
-		fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`)
-			.then(response => response.json())
-			.then((loginHistoryItems) => {
-				const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
+		const response = await fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
+		const loginHistoryItems = await response.json();
 
-				this.setState({
-					loginTime: lastLoginHistory && new Date(lastLoginHistory.loginTime)
-				});
-			});
+		const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
+
+		this.setState({
+			loginTime: lastLoginHistory && new Date(lastLoginHistory.loginTime)
+		});
 	}
 
 	render() {
