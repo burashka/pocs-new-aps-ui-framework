@@ -20,7 +20,7 @@ const userTemplate = {
 	sendInvitation: false
 };
 
-export default class App extends Component {
+export default class EditView extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -33,7 +33,7 @@ export default class App extends Component {
 	render(){
 		const self = this;
 
-		const { wizardState=[] } = this.props;
+		const { context: {wizardState=[]} } = this.props;
 
 		const users = this.state.users;
 		const services = this.state.services;

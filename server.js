@@ -10,6 +10,10 @@ app.use(webpackDevMiddleware(compiler, {
 	publicPath: config.output.publicPath
 }));
 app.get("/", (req, res) => res.sendFile(__dirname + '/index.html'));
+app.get(
+	"/aps/2/resources/78ffbc39-ce89-a2d9-ca96-a3cbf6c1a71b/loginHistory",
+	(req, res) => res.sendFile(__dirname + '/data/loginHistory.json')
+);
 app.listen(port, error => {
 	if (error)	{
 		console.error(error);
