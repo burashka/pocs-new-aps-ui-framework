@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import Panel from '../../platform/Panel';
 import Button from '../../platform/Button';
@@ -61,17 +62,21 @@ function calculateDiff(invitationDate){
 	return Math.ceil(timeDiff / (1000 * 3600));
 }
 
-async function getLoginHistory({dispatch, context}){
-	const { vars: {selectedUser}, user } = context;
+function getLoginHistory(context){
+	return async (dispatch) => {
+		const {vars: {selectedUser}, user} = context;
 
-	try {
-		const response = await fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
-		const loginHistoryItems = await response.json();
-		const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
-		dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
-	} catch(e){
-		dispatch(requestHistoryFailed());
-	}
+		try {
+			const response = await
+			fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
+			const loginHistoryItems = await
+			response.json();
+			const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
+			dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
+		} catch (e) {
+			dispatch(requestHistoryFailed());
+		}
+	};
 }
 
 class UserView extends Component {
@@ -83,7 +88,7 @@ class UserView extends Component {
 	}
 
 	componentDidMount(){
-		getLoginHistory(this.props);
+		this.props.dispatch(getLoginHistory(this.props.context));
 	}
 
 	render() {
@@ -167,7 +172,7 @@ class UserView extends Component {
 	}
 }
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const UserViewConnected = connect(state => state)(UserView);
 
