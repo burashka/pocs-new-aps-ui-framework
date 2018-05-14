@@ -1,8 +1,16 @@
-/*import { SET_SEND_INVITATION } from '../constants/options';
+import { REQUEST_HISTORY_SUCCESS, REQUEST_HISTORY_FAILED } from '../constants';
 
-export function setSendInvitation(val){
+function requestHistorySuccess(val){
 	return {
-		type: 		SET_SEND_INVITATION,
+		type: 		REQUEST_HISTORY_SUCCESS,
 		payload: 	val
 	}
-}	*/
+}
+
+function requestHistoryFailed(){
+	return {
+		type: 		REQUEST_HISTORY_FAILED
+	}
+}
+
+export { requestHistoryFailed, requestHistorySuccess };

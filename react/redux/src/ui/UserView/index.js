@@ -11,7 +11,7 @@ import _ from '../../mocks/i18next';
 import { checkPrivilege } from '../../mocks/apsc';
 
 import rootReducer from './reducers';
-import * as actions from './actions';
+import { requestHistorySuccess, requestHistoryFailed } from './actions';
 
 function getStatus(user) {
 	switch (user.aps.status) {
@@ -69,17 +69,16 @@ class UserView extends Component {
 		};
 	}
 
-	async componentDidMount(){
+	componentDidMount(){
 		const { vars: {selectedUser}, user } = this.props.context;
 
-		const response = await fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
-		const loginHistoryItems = await response.json();
-
-		const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
-
-		this.setState({
-			loginTime: lastLoginHistory && new Date(lastLoginHistory.loginTime)
-		});
+		fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`)
+			.then(response => response.json())
+			.then(loginHistoryItems => {
+				const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
+				this.props.dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
+			})
+			.catch(() => this.props.dispatch(requestHistoryFailed()));
 	}
 
 	render() {
@@ -92,7 +91,7 @@ class UserView extends Component {
 		const status = getStatus(selectedUser);
 		const hasLoginAsPermission = checkPrivilege(`http://www.parallels.com/pa/pa-core-services#${isAdmin ? "own_users-manage": "mycp_access"}`);
 		const hasManagePrivilege = !user.isAccountAdmin || checkPrivilege("http://www.parallels.com/pa/pa-core-services#own_account-manage");
-		const loginTime = this.state.loginTime;
+		const loginTime = this.props.loginTime;
 
 		return <div>
 			{ (disabled || locked) && <Message bsStyle = "warning">
@@ -165,13 +164,7 @@ class UserView extends Component {
 
 const store = createStore(rootReducer);
 
-function mapDispatchToProps(dispatch){
-	return {
-		actions: bindActionCreators(actions, dispatch)
-	};
-}
-
-const UserViewConnected = connect(state => state, mapDispatchToProps)(UserView);
+const UserViewConnected = connect(state => state)(UserView);
 
 export default ({context}) => {
 	return <Provider store = { store }>
