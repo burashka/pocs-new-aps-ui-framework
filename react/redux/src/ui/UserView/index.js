@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createStore, bindActionCreators } from 'redux';
+import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import Panel from '../../platform/Panel';
@@ -61,6 +61,19 @@ function calculateDiff(invitationDate){
 	return Math.ceil(timeDiff / (1000 * 3600));
 }
 
+async function getLoginHistory({dispatch, context}){
+	const { vars: {selectedUser}, user } = context;
+
+	try {
+		const response = await fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
+		const loginHistoryItems = await response.json();
+		const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
+		dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
+	} catch(e){
+		dispatch(requestHistoryFailed());
+	}
+}
+
 class UserView extends Component {
 	constructor(props) {
 		super(props);
@@ -70,15 +83,7 @@ class UserView extends Component {
 	}
 
 	componentDidMount(){
-		const { vars: {selectedUser}, user } = this.props.context;
-
-		fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`)
-			.then(response => response.json())
-			.then(loginHistoryItems => {
-				const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
-				this.props.dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
-			})
-			.catch(() => this.props.dispatch(requestHistoryFailed()));
+		getLoginHistory(this.props);
 	}
 
 	render() {
