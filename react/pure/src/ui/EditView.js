@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import update from 'immutability-helper';
-
 import Panel from '../platform/Panel';
 import CheckBox from '../platform/CheckBox';
 
@@ -46,23 +44,18 @@ export default class EditView extends Component {
 					needRemove = { users.length !== 1 }
 					needAdd = { i+1 === users.length }
 					onRemoveUser = { () => {
-						self.setState({
-							'users': update(users, { $splice: [[i, 1]]})
-						});
+						users.splice(i, 1);
+						self.setState({ users });
 					} }
 					onAddUser = { () => {
-						self.setState({
-							'users': update(users, { $push: [
-									Object.assign({ id: users.length }, userTemplate)
-								]})
-						});
+						users.push({ id: users.length, ...userTemplate });
+						self.setState({ users });
 					} }
 					onUserChange = { (user) => {
 						const idx = users.findIndex(item => item.id === user.id);
+						if (idx > -1) users[idx] = user;
 
-						self.setState({
-							'users': update(users, { [idx]: { $set: user } })
-						});
+						self.setState({ users });
 					} }
 				/>;
 			}) }
@@ -73,9 +66,13 @@ export default class EditView extends Component {
 						description = { serviceItem.label }
 						checked = { services.includes(serviceItem.id) }
 						onChange = {e => {
-							const action = e.target.checked ? { $push: [serviceItem.id] } : { $splice: [[i, 1]]};
+							if (e.target.checked){
+								services.push(serviceItem.id);
+							} else {
+								services.splice(i, 1);
+							}
 
-							self.setState({ 'services': update(services, action) });
+							self.setState({ services });
 						}}
 					/>;
 				}) }
