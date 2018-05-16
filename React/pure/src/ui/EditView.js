@@ -14,7 +14,6 @@ const userTemplate = {
 	login: 		"",
 	notificationEmail: "",
 	hasNotificationEmail: false,
-	vps: 		false,
 	sendInvitation: false
 };
 
