@@ -22,9 +22,8 @@ export default class EditView extends Component {
 		super(props);
 		this.state = {
 			services: [],
-			users: []
+			users: [{ id: 0, ...userTemplate }]
 		};
-		this.state.users.push(Object.assign({ id: this.state.users.length }, userTemplate));
 	}
 
 	render(){
