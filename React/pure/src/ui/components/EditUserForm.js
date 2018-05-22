@@ -36,7 +36,6 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 		/>
 		<Select
 			label={_("Role Name")}
-			placeholder={_("e.g.: John")}
 			options={[
 				{label: "User", value: "User"},
 				{label: "Admin", value: "Admin"}
@@ -49,7 +48,7 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 		/>
 		<TextBox
 			label={hasNotificationEmail ? _("Email Name") : _("Email (To Sign In)")}
-			placeholder={_("e.g.: John")}
+			placeholder={_("e.g.: john@mycompany.com")}
 			description={
 				hasNotificationEmail
 					? _("This email address will be used to sign in and receive notifications.")
@@ -63,6 +62,7 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 		/>
 		{hasNotificationEmail && <TextBox
 			description={_("We'll use this email for account and system updates.")}
+			placeholder={_("e.g.: john@mycompany.com")}
 			label={_("Notification Email")}
 			value={user.notificationEmail}
 			onChange={(e) => {
