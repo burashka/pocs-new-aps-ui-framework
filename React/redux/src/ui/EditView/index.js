@@ -22,7 +22,7 @@ class EditView extends Component {
 			servicesActions, optionsActions, usersActions
 		} = this.props;
 
-		return <div>
+		return <React.Fragment>
 			{ users.map((user, i) => {
 				return <EditUserForm
 					key = { user.id }
@@ -60,7 +60,7 @@ class EditView extends Component {
 					onChange = { (e) => optionsActions.setSendInvitation(e.target.checked) }
 				/>
 			</Panel>
-		</div>;
+		</React.Fragment>;
 	}
 }
 

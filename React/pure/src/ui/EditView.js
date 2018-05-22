@@ -34,7 +34,7 @@ export default class EditView extends Component {
 		const users = this.state.users;
 		const services = this.state.services;
 
-		return <div>
+		return <React.Fragment>
 			{ users.map((user, i) => {
 				return <EditUserForm
 					key = { user.id }
@@ -83,6 +83,6 @@ export default class EditView extends Component {
 					onChange = { (e) => self.setState({ 'sendInvitation': e.target.checked }) }
 				/>
 			</Panel>
-		</div>;
+		</React.Fragment>;
 	}
 }

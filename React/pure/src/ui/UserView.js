@@ -89,7 +89,7 @@ export default class UserView extends Component {
 		const hasManagePrivilege = !user.isAccountAdmin || checkPrivilege("http://www.parallels.com/pa/pa-core-services#own_account-manage");
 		const loginTime = this.state.loginTime;
 
-		return <div>
+		return <React.Fragment>
 			{ (disabled || locked) && <Message bsStyle = "warning">
 				{ disabled
 					? _("The user has been disabled. He/she is not able to log in to Control Panel or use assigned services.")
@@ -154,6 +154,6 @@ export default class UserView extends Component {
 					value={ loginTime ? loginTime : (isCurrentUser ? _("It’s the first time you logged in.") : _("This user has never logged in.")) }
 				/>
 			</Panel>
-		</div>;
+		</React.Fragment>;
 	}
 }
