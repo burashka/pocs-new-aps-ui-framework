@@ -1,7 +1,5 @@
 import React from 'react';
 
-import update from 'immutability-helper';
-
 import _ from "../../mocks/i18next";
 
 import Panel from '../../platform/Panel';
@@ -23,7 +21,8 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			placeholder={_("e.g.: John")}
 			value={user.givenName}
 			onChange={(e) => {
-				onUserChange(update(user, { givenName: { $set: e.target.value } }));
+				user.givenName = e.target.value;
+				onUserChange(user);
 			}}
 		/>
 		<TextBox
@@ -31,7 +30,8 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			placeholder={_("e.g.: Smith")}
 			value={user.familyName}
 			onChange={(e) => {
-				onUserChange(update(user, { familyName: { $set: e.target.value } }));
+				user.familyName = e.target.value;
+				onUserChange(user);
 			}}
 		/>
 		<Select
@@ -42,7 +42,8 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			]}
 			value={user.type}
 			onChange={(e) => {
-				onUserChange(update(user, { type: { $set: e.target.value } }));
+				user.type = e.target.value;
+				onUserChange(user);
 			}}
 		/>
 		<TextBox
@@ -55,7 +56,8 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			}
 			value={user.login}
 			onChange={(e) => {
-				onUserChange(update(user, { login: { $set: e.target.value } }));
+				user.login = e.target.value;
+				onUserChange(user);
 			}}
 		/>
 		{hasNotificationEmail && <TextBox
@@ -64,14 +66,16 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			placeholder={_("e.g.: john@mycompany.com")}
 			value={user.notificationEmail}
 			onChange={(e) => {
-				onUserChange(update(user, { notificationEmail: { $set: e.target.value } }));
+				user.notificationEmail = e.target.value;
+				onUserChange(user);
 			}}
 		/>}
 		<CheckBox
 			description={_("Use different emails to sign in and receive notifications.")}
 			checked={user.hasNotificationEmail}
 			onChange={(e) => {
-				onUserChange(update(user, { hasNotificationEmail: { $set: e.target.checked } }));
+				user.hasNotificationEmail = e.target.checked;
+				onUserChange(user);
 			}}
 		/>
 		{needAdd && <Button
