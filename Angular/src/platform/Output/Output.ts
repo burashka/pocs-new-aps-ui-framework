@@ -2,7 +2,7 @@ import { Input, Component } from '@angular/core';
 
 @Component({
     selector: 'aps-output',
-    templateUrl: './templates/output.html'
+    templateUrl: './Output.template.html'
 })
 export default class Output {
     @Input() label: string;

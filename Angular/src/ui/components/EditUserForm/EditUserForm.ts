@@ -20,7 +20,7 @@ interface Option {
 
 @Component({
     selector: 'poc-editUserForm',
-    templateUrl: './templates/editUserForm.html'
+    templateUrl: './EditUserForm.template.html'
 })
 export default class EditUserForm {
     @Input() id: string;

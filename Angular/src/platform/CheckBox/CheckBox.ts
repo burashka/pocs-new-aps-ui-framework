@@ -2,7 +2,7 @@ import { Input, Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'aps-checkbox',
-    templateUrl: './templates/checkbox.html'
+    templateUrl: './Checkbox.template.html'
 })
 export default class CheckBox {
     @Input() checked: boolean;

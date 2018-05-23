@@ -32,7 +32,7 @@ const userTemplate = {
     selector: 'my-app',
     templateUrl: './EditView.template.html'
 })
-export default class EditViewComponent {
+export default class EditView {
     users: User[] = [{ id: 0, ...userTemplate }];
     services: string[] = [];
     sendInvitation: boolean = false;

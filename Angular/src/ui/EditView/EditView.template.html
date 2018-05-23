@@ -1,4 +1,4 @@
-<div>
+<ng-container>
 	<poc-editUserForm
 		*ngFor="let user of users; let i = index"
 		[user]="user"
@@ -30,4 +30,4 @@
 		(onClicked)="getUsers()"
 		label="Get Users!"
 	></aps-button>
-</div>
+</ng-container>

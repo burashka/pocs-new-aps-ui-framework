@@ -1,14 +1,20 @@
 import { Input, Component, Output, EventEmitter } from '@angular/core';
 
+interface Option {
+    id:     number;
+    label:  string;
+    value:  string;
+}
+
 @Component({
-    selector: 'aps-textbox',
-    templateUrl: './templates/textbox.html'
+    selector: 'aps-select',
+    templateUrl: './Select.template.html'
 })
 export default class TextBox {
     @Input() value: string;
     @Input() label: string;
     @Input() description: string;
-    @Input() placeholder: string;
+    @Input() options: Array<Option>;
 
     @Output() valueChange = new EventEmitter<string>();
     onValueChange(value: string){

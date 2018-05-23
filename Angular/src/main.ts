@@ -1,4 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { EditViewModule } from './ui/EditView/EditView.module';
+import AppModule from './app.module';
 const platform = platformBrowserDynamic();
-platform.bootstrapModule(EditViewModule);
+platform.bootstrapModule(AppModule);
