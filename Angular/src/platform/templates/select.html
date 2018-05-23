@@ -1,0 +1,18 @@
+<div class="form-group">
+	<label class="control-label" *ngIf="label">
+		{{label}}
+	</label>
+	<select
+		class="form-control"
+		[ngModel]="value"
+		(ngModelChange)="onValueChange($event)"
+	>
+		<option
+			*ngFor="let option of options"
+			value = {{option.value}}
+		>{{option.label}}</option>
+	</select>
+	<small class="help-block" *ngIf="description">
+		{{description}}
+	</small>
+</div>

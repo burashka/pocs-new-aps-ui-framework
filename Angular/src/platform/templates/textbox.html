@@ -1,0 +1,14 @@
+<div class="form-group">
+	<label class="control-label" *ngIf="label">
+		{{label}}
+	</label>
+	<input
+		placeholder="{{placeholder}}"
+		class="form-control"
+		[ngModel]="value"
+		(ngModelChange)="onValueChange($event)"
+	>
+	<small class="help-block" *ngIf="description">
+		{{description}}
+	</small>
+</div>

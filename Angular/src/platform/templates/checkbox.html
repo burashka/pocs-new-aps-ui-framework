@@ -1,0 +1,16 @@
+<div class="form-group">
+	<label class="control-label" *ngIf="label">
+		{{label}}
+	</label>
+	<div class="checkbox">
+		<label>
+			<input
+				type="checkbox"
+				[ngModel]="checked"
+				(ngModelChange)="onCheckedChange($event)"
+			>
+			<span *ngIf="description">{{description}}</span>
+		</label>
+		<small class="help-block" *ngIf="hint">{{hint}}</small>
+	</div>
+</div>

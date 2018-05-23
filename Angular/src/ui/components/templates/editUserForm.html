@@ -1,0 +1,46 @@
+<aps-panel
+	title="{{title}}"
+	id="{{id}}"
+>
+	<aps-textbox
+		label="{{firstNameLabel}}"
+		placeholder="{{firstNamePlaceholder}}"
+		[(value)]="user.givenName"
+	></aps-textbox>
+	<aps-textbox
+		label="{{lastNameLabel}}"
+		placeholder="{{lastNamePlaceholder}}"
+		[(value)]="user.familyName"
+	></aps-textbox>
+	<aps-select
+		label="{{roleNameLabel}}"
+		[(value)]="user.type"
+		[options]="userTypes"
+	></aps-select>
+	<aps-textbox
+		label="{{user.hasNotificationEmail ? emailNameText : emailToSignInText}}"
+		placeholder="{{emailPlaceholder}}"
+		description="{{user.hasNotificationEmail ? emailNameDescription : emailToSignInDescription}}"
+		[(value)]="user.familyName"
+	></aps-textbox>
+	<aps-textbox
+		*ngIf="user.hasNotificationEmail"
+		label="{{notificationEmailText}}"
+		placeholder="{{emailPlaceholder}}"
+		description="{{notificationEmailDescription}}"
+		[(value)]="user.familyName"
+	></aps-textbox>
+	<aps-checkbox
+		description="{{diffrentEmailText}}"
+		[(checked)]="user.hasNotificationEmail"
+	></aps-checkbox>
+
+	<aps-button
+		(onClicked)="addUser()"
+		[label]="addUserText"
+	></aps-button>
+	<aps-button
+		(onClicked)="removeUser(i)"
+		[label]="removeUserText"
+	></aps-button>
+</aps-panel>
