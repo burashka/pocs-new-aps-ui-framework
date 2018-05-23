@@ -4,7 +4,7 @@
 	"description": "PoC for APS2 Connector UI on React&Redux",
 	"author": "Evgeny Uspenskiy",
 	"scripts": {
-		"dev": "webpack-dev-server",
+		"dev": "webpack-dev-server --host=0.0.0.0",
 		"build": "webpack"
 	},
 	"dependencies": {
