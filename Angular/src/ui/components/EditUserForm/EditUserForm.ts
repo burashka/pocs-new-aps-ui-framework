@@ -25,6 +25,8 @@ interface Option {
 export default class EditUserForm {
     @Input() id: string;
     @Input() user: User;
+    @Input() needAdd: boolean;
+    @Input() needRemove: boolean;
 
     @Output() onAddUser = new EventEmitter();
     addUser() {

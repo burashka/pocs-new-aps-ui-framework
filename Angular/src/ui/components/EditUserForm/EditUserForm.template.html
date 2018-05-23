@@ -36,10 +36,12 @@
 	></aps-checkbox>
 
 	<aps-button
+		*ngIf="needAdd"
 		(onClicked)="addUser()"
 		[label]="addUserText"
 	></aps-button>
 	<aps-button
+		*ngIf="needRemove"
 		(onClicked)="removeUser(i)"
 		[label]="removeUserText"
 	></aps-button>

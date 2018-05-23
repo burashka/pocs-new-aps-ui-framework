@@ -5,13 +5,15 @@
 		[id]="user.id"
 		(onAddUser)="addUser()"
 		(onRemoveUser)="removeUser(i)"
+		[needRemove]="users.length !== 1"
+		[needAdd]="i+1 === users.length"
 	></poc-editUserForm>
 	<aps-panel
 		[title]="servicesText"
 	>
 		<aps-checkbox
 			*ngFor="let serviceItem of wizardState; let i = index"
-			checked = "{{services.includes(serviceItem.id)}}"
+			[checked] = "services.includes(serviceItem.id)"
 			[description]="serviceItem.label"
 			(checkedChange)="servicesUpdate($event, serviceItem.id, i)"
 		>{{serviceItem.label}}</aps-checkbox>
