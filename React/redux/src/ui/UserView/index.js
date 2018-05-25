@@ -6,6 +6,7 @@ import Panel from '../../platform/Panel';
 import Button from '../../platform/Button';
 import Output from '../../platform/Output';
 import Message from '../../platform/Message';
+import { context } from '../../platform/props';
 
 import _ from '../../mocks/i18next';
 import { checkPrivilege } from '../../mocks/apsc';
@@ -159,6 +160,10 @@ class UserView extends Component {
 		</React.Fragment>;
 	}
 }
+
+UserView.propTypes = {
+	context
+};
 
 const store = createStore(rootReducer);
 

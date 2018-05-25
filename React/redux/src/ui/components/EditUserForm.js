@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string, number, bool, oneOf, func } from 'prop-types';
 
 import _ from "../../mocks/i18next";
 
@@ -88,6 +89,24 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			onClick={onRemoveUser}
 		/>}
 	</Panel>;
+};
+
+EditUserForm.propTypes = {
+	user: shape({
+		id: number,
+		givenName: 	string,
+		familyName: string,
+		type: 		oneOf(["User", "Admin"]),
+		login: 		string,
+		notificationEmail: string,
+		hasNotificationEmail: bool,
+		sendInvitation: bool
+	}).isRequired,
+	needRemove: bool,
+	needAdd: bool,
+	onRemoveUser: func,
+	onAddUser: func,
+	onUserChange: func.isRequired
 };
 
 export default EditUserForm;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { string, number, oneOfType } from 'prop-types';
 
 const Output = ({ id, label, description, value }) => {
 	return <FormGroup controlId={id}>
@@ -11,6 +12,13 @@ const Output = ({ id, label, description, value }) => {
 		</div>
 		{description && <HelpBlock>{description}</HelpBlock>}
 	</FormGroup>;
+};
+
+Output.propTypes = {
+	id: oneOfType([number, string]),
+	description: string,
+	label: string,
+	value: string
 };
 
 export default Output;

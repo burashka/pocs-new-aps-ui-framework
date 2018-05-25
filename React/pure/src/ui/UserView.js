@@ -7,6 +7,8 @@ import Message from '../platform/Message';
 
 import _ from '../mocks/i18next';
 import { checkPrivilege } from '../mocks/apsc';
+import {context} from "../platform/props";
+import EditView from "./EditView";
 
 function getStatus(user) {
 	switch (user.aps.status) {
@@ -56,7 +58,7 @@ function calculateDiff(invitationDate){
 	return Math.ceil(timeDiff / (1000 * 3600));
 }
 
-export default class UserView extends Component {
+class UserView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -157,3 +159,9 @@ export default class UserView extends Component {
 		</React.Fragment>;
 	}
 }
+
+EditView.propTypes = {
+	context
+};
+
+export default UserView;

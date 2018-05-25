@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 
 import Panel from '../../platform/Panel';
 import CheckBox from '../../platform/CheckBox';
+import { context } from '../../platform/props';
 
 import _ from '../../mocks/i18next';
 
@@ -63,6 +64,10 @@ class EditView extends Component {
 		</React.Fragment>;
 	}
 }
+
+EditView.propTypes = {
+	context
+};
 
 const store = createStore(rootReducer);
 

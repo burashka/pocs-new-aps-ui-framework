@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Panel from '../platform/Panel';
 import CheckBox from '../platform/CheckBox';
+import { context } from '../platform/props';
 
 import _ from '../mocks/i18next';
 
@@ -17,12 +18,14 @@ const userTemplate = {
 	sendInvitation: false
 };
 
-export default class EditView extends Component {
+class EditView extends Component {
 	constructor(props){
 		super(props);
+
 		this.state = {
 			services: [],
-			users: [{ id: 0, ...userTemplate }]
+			users: [{ id: 0, ...userTemplate }],
+			sendInvitation: false
 		};
 	}
 
@@ -86,3 +89,9 @@ export default class EditView extends Component {
 		</React.Fragment>;
 	}
 }
+
+EditView.propTypes = {
+	context
+};
+
+export default EditView;

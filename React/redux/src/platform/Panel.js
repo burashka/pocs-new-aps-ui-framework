@@ -1,7 +1,9 @@
 import React from 'react';
+import { string, number, oneOfType } from 'prop-types';
+import Output from "./Output";
 
-const Panel = ({ title, children }) => {
-	return <div>
+const Panel = ({ id, title, children }) => {
+	return <div id={id}>
 		<div className="panel panel-default">
 			<div className="panel-heading">
 				<h3 className="panel-title">
@@ -13,6 +15,11 @@ const Panel = ({ title, children }) => {
 			</div>
 		</div>
 	</div>
+};
+
+Output.propTypes = {
+	id: oneOfType([number, string]),
+	title: string
 };
 
 export default Panel;
