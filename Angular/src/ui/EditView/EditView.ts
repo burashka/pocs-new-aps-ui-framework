@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-
-interface View {
-    id: 'vps',
-    label: 'Add VPS'
-}
+import { View } from '../../platform/Typings';
+import { ContextService } from "../../context.service";
 
 enum UserType { User='User', Admin='Admin' }
 
@@ -32,7 +29,7 @@ const userTemplate = {
     selector: 'my-app',
     templateUrl: './EditView.template.html'
 })
-export default class EditView {
+export class EditView {
     users: User[] = [{ id: 0, ...userTemplate }];
     services: string[] = [];
     sendInvitation: boolean = false;
@@ -62,4 +59,6 @@ export default class EditView {
     private getUsers(): void {
         console.log(this.users);
     }
+
+    // constructor(private context: ContextService){}
 }

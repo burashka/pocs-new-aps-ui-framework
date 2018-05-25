@@ -4,7 +4,7 @@ import { Input, Component, Output, EventEmitter } from '@angular/core';
     selector: 'aps-button',
     templateUrl: './Button.template.html'
 })
-export default class Button {
+export class Button {
     @Input() iconClass: string;
     @Input() label: string;
 

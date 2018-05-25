@@ -4,7 +4,7 @@ import { Input, Component, Output, EventEmitter } from '@angular/core';
     selector: 'aps-textbox',
     templateUrl: './Textbox.template.html'
 })
-export default class TextBox {
+export class TextBox {
     @Input() value: string;
     @Input() label: string;
     @Input() description: string;

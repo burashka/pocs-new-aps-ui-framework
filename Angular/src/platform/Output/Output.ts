@@ -4,7 +4,7 @@ import { Input, Component } from '@angular/core';
     selector: 'aps-output',
     templateUrl: './Output.template.html'
 })
-export default class Output {
+export class Output {
     @Input() label: string;
     @Input() description: string;
 }

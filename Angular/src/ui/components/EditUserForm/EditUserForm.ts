@@ -22,7 +22,7 @@ interface Option {
     selector: 'poc-editUserForm',
     templateUrl: './EditUserForm.template.html'
 })
-export default class EditUserForm {
+export class EditUserForm {
     @Input() id: string;
     @Input() user: User;
     @Input() needAdd: boolean;

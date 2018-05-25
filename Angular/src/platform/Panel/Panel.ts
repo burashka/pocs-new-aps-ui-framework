@@ -4,6 +4,6 @@ import { Input, Component } from '@angular/core';
     selector: 'aps-panel',
     templateUrl: './Panel.template.html'
 })
-export default class Panel {
+export class Panel {
     @Input() title: string;
 }

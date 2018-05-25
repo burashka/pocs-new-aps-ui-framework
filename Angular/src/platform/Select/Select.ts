@@ -10,7 +10,7 @@ interface Option {
     selector: 'aps-select',
     templateUrl: './Select.template.html'
 })
-export default class TextBox {
+export class Select {
     @Input() value: string;
     @Input() label: string;
     @Input() description: string;

@@ -1,13 +1,15 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import Platform from './platform/platform.module';
-import EditView from './ui/EditView/EditView';
-import EditUserForm from './ui/components/EditUserForm/EditUserForm';
+import { PlatformModule } from './platform/platform.module';
+import { EditView } from './ui/EditView/EditView';
+import { EditUserForm } from './ui/components/EditUserForm/EditUserForm';
+import { ContextService } from './context.service';
 
 @NgModule({
-    imports:      [ BrowserModule, Platform ],
+    imports:      [ BrowserModule, PlatformModule ],
     declarations: [ EditView,
                     EditUserForm],
-    bootstrap:    [ EditView ]
+    bootstrap:    [ EditView ],
+    providers:    [ContextService]
 })
-export default class AppModule { }
+export class AppModule { }
