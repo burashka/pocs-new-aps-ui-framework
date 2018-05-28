@@ -1,0 +1,24 @@
+<poc-edit-user-form *ngFor="let user of users.users; let i = index"
+                               [user]="user"
+                               [id]="user.id"
+                               (onAddUser)="users.addUser()"
+                               (onRemoveUser)="users.removeUser(i)"
+                               [needRemove]="users.users.length !== 1"
+                               [needAdd]="i + 1 === users.users.length"></poc-edit-user-form>
+<aps-panel [title]="servicesText">
+  <aps-checkbox *ngFor="let serviceItem of context.wizardState; let i = index"
+                [checked]="services.includes(serviceItem.id)"
+                [description]="serviceItem.label"
+                (checkedChange)="servicesUpdate($event, serviceItem.id, i)">
+    {{serviceItem.label}}
+  </aps-checkbox>
+</aps-panel>
+<aps-panel [title]="selectOptionsText">
+  <aps-checkbox [description]="sendActivationEmailDesc"
+                [hint]="sendActivationEmailHint"
+                [(checked)]="sendInvitation">
+  </aps-checkbox>
+</aps-panel>
+<aps-button (click)="users.getUsers()"
+            label="Get Users!">
+</aps-button>
