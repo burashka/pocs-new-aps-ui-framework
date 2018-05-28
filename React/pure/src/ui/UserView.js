@@ -141,7 +141,7 @@ class UserView extends Component {
 					value={login}
 				/>
 				{!isEmailHidden && <Output label={_("Personal Email")} value={email} />}
-				{!isNotificationEmailHidden && <Output label={_("Notification Email")} value={email} />}
+				{!isNotificationEmailHidden && <Output label={_("Notification Email")} value={notificationEmail} />}
 			</Panel>
 			<Panel
 				title = { _("Postal Address") }
