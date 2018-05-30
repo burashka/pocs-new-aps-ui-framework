@@ -1,47 +1,49 @@
 <aps-panel
-      [title]="title"
+      [title]='_("Specify New User")'
       [id]="id"
 >
     <aps-textbox
-        [label]="firstNameLabel"
-        [placeholder]="firstNamePlaceholder"
+        [label]="_('First Name')"
+        [placeholder]='_("e.g.: John")'
         [(value)]="user.givenName"
     ></aps-textbox>
     <aps-textbox
-        [label]="lastNameLabel"
-        [placeholder]="lastNamePlaceholder"
+        [label]='_("Last Name")'
+        [placeholder]='_("e.g.: Smith")'
         [(value)]="user.familyName"
     ></aps-textbox>
     <aps-select
-        [label]="roleNameLabel"
+        [label]='_("Role Name")'
         [(value)]="user.type"
         [options]="userTypes"
     ></aps-select>
     <aps-textbox
-        [label]="user.hasNotificationEmail ? emailNameText : emailToSignInText"
-        [placeholder]="emailPlaceholder"
-        [description]="user.hasNotificationEmail ? emailNameDescription : emailToSignInDescription"
+        [label]='user.hasNotificationEmail ? _("Email Name") : _("Email (To Sign In)")'
+        [placeholder]='_("e.g.: john@mycompany.com")'
+        [description]='user.hasNotificationEmail
+                            ? _("This email address will be used to sign in and receive notifications.")
+                            : _("You`ll use it to sign in.")'
         [(value)]="user.login"
     ></aps-textbox>
     <aps-textbox
         *ngIf="user.hasNotificationEmail"
-        [label]="notificationEmailText"
-        [placeholder]="emailPlaceholder"
-        [description]="notificationEmailDescription"
+        [label]='_("Notification Email")'
+        [placeholder]='_("e.g.: john@mycompany.com")'
+        [description]='_("We`ll use this email for account and system updates.")'
         [(value)]="user.notificationEmail"
     ></aps-textbox>
     <aps-checkbox
-        [description]="diffrentEmailText"
+        [description]='_("Use different emails to sign in and receive notifications.")'
         [(checked)]="user.sendInvitation"
     ></aps-checkbox>
     <aps-button
         *ngIf="needAdd"
         (onClicked)="addUser()"
-        [label]="addUserText"
+        [label]='_("On More User")'
     ></aps-button>
     <aps-button
         *ngIf="needRemove"
         (onClicked)="removeUser(i)"
-        [label]="removeUserText"
+        [label]='_("Remove User")'
     ></aps-button>
 </aps-panel>

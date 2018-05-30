@@ -1,81 +1,93 @@
 <aps-message
 	*ngIf="disabled"
-	[description]="disabledMessage"
+	[description]='_("The user has been disabled. He/she is not able to log in to Control Panel or use assigned services.")'
 ></aps-message>
 <aps-message
 		*ngIf="locked"
-		[description]="lockedMessage"
+		[description]='_("The user has exceeded amount of allowed login attempts and got locked. Click Unlock to enable login back.")'
 ></aps-message>
 <aps-message
 	*ngIf="status === 'invited'"
-	[description]="calculateDiff(context.vars.selectedUser.invitationDate) > 48 ? didNotCompleteText : didNotActivationText"
+	[description]='calculateDiff(context.vars.selectedUser.invitationDate) > 48
+	 				? _("The user did not complete the activation. You need to resend an invitation, because the activation link has expired.")
+	 				: _("The user did not yet complete the activation. The activation link emailed to the user, expires in 48 hours. If needed, you can resend an invitation.")'
 ></aps-message>
 <aps-button
-	*ngIf="hasManagePrivilege && hasLoginAsPermission && !isCurrentUser	&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
-	[label]="loginAsText + context.vars.selectedUser.givenName"
+	*ngIf="hasManagePrivilege
+	 		&& hasLoginAsPermission
+	 		&& !isCurrentUser
+	 		&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
+	[label]='_("Login as ") + context.vars.selectedUser.givenName'
 ></aps-button>
 <aps-button
-	*ngIf="hasManagePrivilege && !isCurrentUser	&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
-	[label]="ResetPasswordText"
+	*ngIf="hasManagePrivilege
+	 			&& !isCurrentUser
+	 			&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
+	[label]='_("Reset password")'
 ></aps-button>
 <aps-button
 	*ngIf="isCurrentUser && !context.vars.selectedUser.invitationDate"
-	[label]="changePasswordText"
+	[label]='_("Change Password")'
 ></aps-button>
 <aps-button
 	*ngIf="!isAdmin || !isCurrentUser"
-	[label]="DeleteText"
+	[label]='_("Delete")'
 ></aps-button>
 <aps-panel
-	[title]="userSettingsText"
+	[title]='_("User Settings")'
 >
 	<aps-output
-		[label]="nameText"
+		[label]='_("Name")'
 		[value]="context.vars.selectedUser.fullName"
 	></aps-output>
 	<aps-output
-		[label]="roleText"
+		[label]='_("Role")'
 		[value]="isAdmin ? adminText : userText"
 	></aps-output>
 	<aps-output
-		[label]="phoneText"
+		[label]='_("Phone")'
 		[value]="context.vars.selectedUser.telWork"
 	></aps-output>
 	<aps-output
-		[label]="mobilePhoneText"
+		[label]='_("Mobile Phone")'
 		[value]="context.vars.selectedUser.telCell"
 	></aps-output>
 	<aps-output
-		[label]="languageText"
+		[label]='_("Language")'
 		[value]="englishText"
 	></aps-output>
 	<aps-output
-		[label]="isEmailHidden && isNotificationEmailHidden ? emailText : emailToSignInText"
+		[label]='isEmailHidden && isNotificationEmailHidden
+		 			? _("Email")
+		 			: _("Email (To Sign In)")'
 		[value]="context.vars.selectedUser.login"
 	></aps-output>
 	<aps-output
 		*ngIf="!isEmailHidden"
-		[label]="personalEmailText"
+		[label]='_("Personal Email")'
 		[value]="context.vars.selectedUser.email"
 	></aps-output>
 	<aps-output
 		*ngIf="!isNotificationEmailHidden"
-		[label]="notificationEmailText"
+		[label]='_("Notification Email")'
 		[value]="context.vars.selectedUser.notificationEmail"
 	></aps-output>
 </aps-panel>
 <aps-panel
-	[title]="addressText"
+	[title]='_("Postal Address")'
 >
 	<aps-output
 		[value]="context.vars.selectedUser.addressPostal.locality + ',' + context.vars.selectedUser.addressPostal.extendedAddress"
 	></aps-output>
 </aps-panel>
 <aps-panel
-	[title]="loginHistoryText"
+	[title]='_("Login History")'
 >
 	<aps-output
-		[label]="loginTime ? lastAccessedText : ''"
-		[value]="loginTime ? loginTime : (isCurrentUser ? firstTimeText : neverLoggedText)"
+		[label]="loginTime ? _('Last accessed') : ''"
+		[value]='loginTime ? loginTime :
+					(isCurrentUser
+					 	? _("It’s the first time you logged in.")
+					 	: _("This user has never logged in."))'
 	></aps-output>
 </aps-panel>

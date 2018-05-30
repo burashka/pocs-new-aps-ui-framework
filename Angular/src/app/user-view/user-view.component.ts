@@ -55,31 +55,6 @@ function calculateDiff(invitationDate){
     templateUrl: './user-view.component.html'
 })
 export class UserViewComponent implements OnInit {
-    private disabledMessage = "The user has been disabled. He/she is not able to log in to Control Panel or use assigned services.";
-    private lockecMessage = "The user has exceeded amount of allowed login attempts and got locked. Click Unlock to enable login back.";
-    private didNotCompleteText = "The user did not complete the activation. You need to resend an invitation, because the activation link has expired.";
-    private didNotActivationText = "The user did not yet complete the activation. The activation link emailed to the user, expires in 48 hours. If needed, you can resend an invitation.";
-    private loginAsText = "Login as ";
-    private ResetPasswordText = "Reset password";
-    private changePasswordText = "Change Password";
-    private DeleteText = "Delete";
-    private userSettingsText = "User Settings";
-    private nameText = "Name";
-    private roleText = "Role";
-    private phoneText = "Phone";
-    private mobilePhoneText = "Mobile Phone";
-    private languageText = "Language";
-    private englishText = "English (United States)";
-    private emailText = "Email";
-    private emailToSignInText = "Email (To Sign In)";
-    private personalEmailText = "Personal Email";
-    private notificationEmailText = "Notification Email";
-    private addressText = "Postal Address";
-    private loginHistoryText = "Login History";
-    private lastAccessedText = "Last accessed";
-    private firstTimeText = "It’s the first time you logged in.";
-    private neverLoggedText= "This user has never logged in.";
-
     private _: (text: string) => string;
     private hasLoginAsPermission: boolean;
     private hasManagePrivilege: boolean;
