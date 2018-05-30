@@ -3,7 +3,7 @@ import { ContextService } from '@aps';
 import { UsersService } from "../users.service";
 
 @Component({
-  selector: 'poc-root',
+  selector: 'edit-view',
   templateUrl: './edit-view.component.html'
 })
 export class EditViewComponent {
@@ -13,12 +13,9 @@ export class EditViewComponent {
   private servicesText = 'Test';
   services: string[] = [];
   sendInvitation = false;
-  wizardState = [{
-    id: 'vps',
-    label: 'Add VPS'
-  }];
 
   constructor(private context: ContextService, private users: UsersService) {}
+
   private servicesUpdate(status: boolean, serviceId: string, i: number){
     console.log(status, serviceId, this.services.includes(serviceId));
     if (status) {

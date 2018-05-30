@@ -1,12 +1,18 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import { ContextService } from './context.service';
-import { PanelComponent } from './ui/panel/panel.component';
-import { CheckboxComponent } from './ui/checkbox/checkbox.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+import { ContextService } from './context.service';
+import { ApscService } from "./apsc.service";
+import { I18nService } from "./i18n.service";
+
+import { PanelComponent } from './ui/panel/panel.component';
+import { CheckboxComponent } from './ui/checkbox/checkbox.component';
 import { ButtonComponent } from './ui/button/button.component';
 import { SelectComponent } from './ui/select/select.component';
 import { TextboxComponent } from './ui/textbox/textbox.component';
+import { MessageComponent } from "./ui/message/message.component";
+import { OutputComponent } from "./ui/output/output.component";
 
 @NgModule({
   imports: [FormsModule, CommonModule],
@@ -15,7 +21,9 @@ import { TextboxComponent } from './ui/textbox/textbox.component';
     CheckboxComponent,
     ButtonComponent,
     SelectComponent,
-    TextboxComponent
+    TextboxComponent,
+    MessageComponent,
+    OutputComponent
   ],
   exports: [
     FormsModule,
@@ -23,10 +31,14 @@ import { TextboxComponent } from './ui/textbox/textbox.component';
     CheckboxComponent,
     ButtonComponent,
     SelectComponent,
-    TextboxComponent
+    TextboxComponent,
+    MessageComponent,
+    OutputComponent
   ],
   providers: [
-    ContextService
+    ContextService,
+    ApscService,
+    I18nService
   ]
 })
 export class ApsModule {

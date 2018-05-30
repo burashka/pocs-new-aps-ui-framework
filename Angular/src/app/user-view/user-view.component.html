@@ -1,0 +1,81 @@
+<aps-message
+	*ngIf="disabled"
+	[description]="disabledMessage"
+></aps-message>
+<aps-message
+		*ngIf="locked"
+		[description]="lockedMessage"
+></aps-message>
+<aps-message
+	*ngIf="status === 'invited'"
+	[description]="calculateDiff(context.vars.selectedUser.invitationDate) > 48 ? didNotCompleteText : didNotActivationText"
+></aps-message>
+<aps-button
+	*ngIf="hasManagePrivilege && hasLoginAsPermission && !isCurrentUser	&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
+	[label]="loginAsText + context.vars.selectedUser.givenName"
+></aps-button>
+<aps-button
+	*ngIf="hasManagePrivilege && !isCurrentUser	&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
+	[label]="ResetPasswordText"
+></aps-button>
+<aps-button
+	*ngIf="isCurrentUser && !context.vars.selectedUser.invitationDate"
+	[label]="changePasswordText"
+></aps-button>
+<aps-button
+	*ngIf="!isAdmin || !isCurrentUser"
+	[label]="DeleteText"
+></aps-button>
+<aps-panel
+	[title]="userSettingsText"
+>
+	<aps-output
+		[label]="nameText"
+		[value]="context.vars.selectedUser.fullName"
+	></aps-output>
+	<aps-output
+		[label]="roleText"
+		[value]="isAdmin ? adminText : userText"
+	></aps-output>
+	<aps-output
+		[label]="phoneText"
+		[value]="context.vars.selectedUser.telWork"
+	></aps-output>
+	<aps-output
+		[label]="mobilePhoneText"
+		[value]="context.vars.selectedUser.telCell"
+	></aps-output>
+	<aps-output
+		[label]="languageText"
+		[value]="englishText"
+	></aps-output>
+	<aps-output
+		[label]="isEmailHidden && isNotificationEmailHidden ? emailText : emailToSignInText"
+		[value]="context.vars.selectedUser.login"
+	></aps-output>
+	<aps-output
+		*ngIf="!isEmailHidden"
+		[label]="personalEmailText"
+		[value]="context.vars.selectedUser.email"
+	></aps-output>
+	<aps-output
+		*ngIf="!isNotificationEmailHidden"
+		[label]="notificationEmailText"
+		[value]="context.vars.selectedUser.notificationEmail"
+	></aps-output>
+</aps-panel>
+<aps-panel
+	[title]="addressText"
+>
+	<aps-output
+		[value]="context.vars.selectedUser.addressPostal.locality + ',' + context.vars.selectedUser.addressPostal.extendedAddress"
+	></aps-output>
+</aps-panel>
+<aps-panel
+	[title]="loginHistoryText"
+>
+	<aps-output
+		[label]="loginTime ? lastAccessedText : ''"
+		[value]="loginTime ? loginTime : (isCurrentUser ? firstTimeText : neverLoggedText)"
+	></aps-output>
+</aps-panel>

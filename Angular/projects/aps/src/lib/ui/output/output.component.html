@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label class="control-label" *ngIf="label">
+		{{label}}
+	</label>
+	<div class="input-group">
+		<p class="form-control-static text-default">{{value}}</p>
+	</div>
+	<small class="help-block" *ngIf="description">
+		{{description}}
+	</small>
+</div>
