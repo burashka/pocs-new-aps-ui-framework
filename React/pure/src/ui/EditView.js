@@ -1,10 +1,12 @@
+/* Example of View with forms */
+
 import React, { Component } from 'react';
 
 import Panel from '../platform/Panel';
 import CheckBox from '../platform/CheckBox';
 import { context } from '../platform/props';
 
-import _ from '../mocks/i18next';
+import _ from '../platform/mocks/i18next';
 
 import EditUserForm from './components/EditUserForm';
 

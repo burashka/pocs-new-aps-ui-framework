@@ -1,7 +1,9 @@
+/* Example of custom component */
+
 import React from 'react';
 import { shape, string, number, bool, oneOf, func } from 'prop-types';
 
-import _ from "../../mocks/i18next";
+import _ from "../../platform/mocks/i18next";
 
 import Panel from '../../platform/Panel';
 import TextBox from '../../platform/TextBox';

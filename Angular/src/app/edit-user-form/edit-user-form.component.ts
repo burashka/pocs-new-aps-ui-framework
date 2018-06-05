@@ -1,3 +1,5 @@
+/* Example of custom component */
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../users/user';
 import { UserType } from '../users/user-type';

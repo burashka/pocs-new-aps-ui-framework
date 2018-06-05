@@ -1,3 +1,5 @@
+/* Example of View with ajax */
+
 import React, { Component } from 'react';
 
 import Panel from '../platform/Panel';
@@ -5,8 +7,8 @@ import Button from '../platform/Button';
 import Output from '../platform/Output';
 import Message from '../platform/Message';
 
-import _ from '../mocks/i18next';
-import { checkPrivilege } from '../mocks/apsc';
+import _ from '../platform/mocks/i18next';
+import { checkPrivilege } from '../platform/mocks/apsc';
 import {context} from "../platform/props";
 import EditView from "./EditView";
 

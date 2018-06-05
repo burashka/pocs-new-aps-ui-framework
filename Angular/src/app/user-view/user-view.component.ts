@@ -1,3 +1,5 @@
+/* Example of View with ajax */
+
 import { Component, OnInit } from '@angular/core';
 import { ContextService, ApscService, I18nService } from '@aps';
 import {UsersService} from "../users.service";
@@ -43,13 +45,6 @@ function getStatus(user) {
     return "ready";
 }
 
-function calculateDiff(invitationDate){
-    const currentDate = new Date();
-    invitationDate = new Date(invitationDate);
-    const timeDiff = currentDate.getTime() - invitationDate.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600));
-}
-
 @Component({
     selector: 'user-view',
     templateUrl: './user-view.component.html'
@@ -89,5 +84,12 @@ export class UserViewComponent implements OnInit {
         this.status = getStatus(selectedUser);
         this.hasLoginAsPermission = this.apsc.checkPrivilege(`http://www.parallels.com/pa/pa-core-services#${this.isAdmin ? "own_users-manage": "mycp_access"}`);
         this.hasManagePrivilege = !user.isAccountAdmin || this.apsc.checkPrivilege("http://www.parallels.com/pa/pa-core-services#own_account-manage");
+    }
+
+    calculateDiff(invitationDate){
+        const currentDate = new Date();
+        invitationDate = new Date(invitationDate);
+        const timeDiff = currentDate.getTime() - invitationDate.getTime();
+        return Math.ceil(timeDiff / (1000 * 3600));
     }
 }

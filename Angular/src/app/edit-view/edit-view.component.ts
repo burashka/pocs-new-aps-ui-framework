@@ -1,3 +1,5 @@
+/* Example of View with forms */
+
 import { Component } from '@angular/core';
 import {ContextService, I18nService} from '@aps';
 import { UsersService } from "../users.service";
