@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
 
 import Panel from '../../platform/Panel';
 import Button from '../../platform/Button';
@@ -11,8 +9,8 @@ import { context } from '../../platform/props';
 import _ from '../../mocks/i18next';
 import { checkPrivilege } from '../../mocks/apsc';
 
-import rootReducer from './reducers';
-import { requestHistorySuccess, requestHistoryFailed } from './actions';
+import { actions } from './model';
+import {connect} from "react-redux";
 
 function getStatus(user) {
 	switch (user.aps.status) {
@@ -60,19 +58,6 @@ function calculateDiff(invitationDate){
 	invitationDate = new Date(invitationDate);
 	const timeDiff = currentDate.getTime() - invitationDate.getTime();
 	return Math.ceil(timeDiff / (1000 * 3600));
-}
-
-async function getLoginHistory({dispatch, context}){
-	const { vars: {selectedUser}, user } = context;
-
-	try {
-		const response = await fetch(`/aps/2/resources/${selectedUser.aps.id}/loginHistory?sort(-loginTime),limit(${user.aps.id === selectedUser.aps.id ? "1" : "0"},1)`);
-		const loginHistoryItems = await response.json();
-		const lastLoginHistory = loginHistoryItems.length > 0 ? loginHistoryItems[0] : undefined;
-		dispatch(requestHistorySuccess(lastLoginHistory && new Date(lastLoginHistory.loginTime)));
-	} catch(e){
-		dispatch(requestHistoryFailed());
-	}
 }
 
 function MessageList({ disabled, locked, status, invitationDate}){
@@ -148,7 +133,7 @@ function UserSettings({ isAdmin, user: { fullName, telWork, telCell, login, emai
 
 class UserView extends Component {
 	componentDidMount(){
-		getLoginHistory(this.props);
+		this.props.dispatch(actions.requestHistory(this.props.context));
 	}
 
 	render() {
@@ -199,14 +184,8 @@ UserView.propTypes = {
 	context
 };
 
-const store = createStore(rootReducer);
-
-const UserViewConnected = connect(state => state)(UserView);
+const UserViewConnected = connect(state => state.userViewState)(UserView);
 
 export default ({context}) => {
-	return <Provider store = { store }>
-		<UserViewConnected
-			context = { context }
-		/>
-	</Provider>;
+	return <UserViewConnected context = { context } />;
 };

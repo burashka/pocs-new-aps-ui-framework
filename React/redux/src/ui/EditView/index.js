@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { createStore, bindActionCreators } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import Panel from '../../platform/Panel';
 import CheckBox from '../../platform/CheckBox';
@@ -9,10 +9,7 @@ import { context } from '../../platform/props';
 import _ from '../../mocks/i18next';
 
 import EditUserForm from '../components/EditUserForm';
-import rootReducer from './reducers';
-import * as optionsActions from './actions/OptionsActions';
-import * as servicesActions from './actions/ServicesActions';
-import * as usersActions from './actions/UsersActions';
+import { actions } from './model';
 import userTemplate from './userTemplate';
 
 class EditView extends Component {
@@ -69,22 +66,16 @@ EditView.propTypes = {
 	context
 };
 
-const store = createStore(rootReducer);
-
 function mapDispatchToProps(dispatch){
 	return {
-		optionsActions: bindActionCreators(optionsActions, dispatch),
-		servicesActions: bindActionCreators(servicesActions, dispatch),
-		usersActions: bindActionCreators(usersActions, dispatch)
+		optionsActions: bindActionCreators(actions.options, dispatch),
+		servicesActions: bindActionCreators(actions.services, dispatch),
+		usersActions: bindActionCreators(actions.users, dispatch)
 	};
 }
 
-const EditViewConnected = connect(state => state, mapDispatchToProps)(EditView);
+const EditViewConnected = connect(state => state.editViewState, mapDispatchToProps)(EditView);
 
 export default ({context}) => {
-	return <Provider store = { store }>
-		<EditViewConnected
-			context = { context }
-		/>
-	</Provider>;
+	return <EditViewConnected context = { context } />;
 };
