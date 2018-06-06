@@ -1,7 +1,7 @@
 {
 	"name": "aps-poc-react-redux",
 	"version": "1.0.0",
-	"description": "PoC for APS2 Connector UI on React&Redux",
+	"description": "PoC for APS2 UI Runtime on React&Redux",
 	"main": "index.js",
 	"scripts": {
 		"start": "node server.js"

@@ -1,6 +1,7 @@
 {
-  "name": "aps-poc",
-  "version": "0.0.0",
+	"name": "aps-poc-angular",
+	"version": "1.0.0",
+	"description": "PoC for APS2 UI Runtime on Angular",
   "scripts": {
     "start": "ng serve --host 0.0.0.0 --port 4200",
     "ng": "ng",

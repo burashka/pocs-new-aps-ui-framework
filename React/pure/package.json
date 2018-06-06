@@ -1,7 +1,7 @@
 {
 	"name": "aps-poc-react-pure",
 	"version": "1.0.0",
-	"description": "PoC for APS2 Connector UI on pure React",
+	"description": "PoC for APS2 UI Runtime on pure React",
 	"main": "index.js",
 	"scripts": {
 		"start": "node server.js"
