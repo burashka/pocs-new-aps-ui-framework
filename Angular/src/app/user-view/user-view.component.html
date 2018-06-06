@@ -1,93 +1,93 @@
 <aps-message
 	*ngIf="disabled"
-	[description]='_("The user has been disabled. He/she is not able to log in to Control Panel or use assigned services.")'
+	[description]='"The user has been disabled. He/she is not able to log in to Control Panel or use assigned services." | translate'
 ></aps-message>
 <aps-message
 		*ngIf="locked"
-		[description]='_("The user has exceeded amount of allowed login attempts and got locked. Click Unlock to enable login back.")'
+		[description]='"The user has exceeded amount of allowed login attempts and got locked. Click Unlock to enable login back." | translate'
 ></aps-message>
 <aps-message
 	*ngIf="status === 'invited'"
 	[description]='calculateDiff(context.vars.selectedUser.invitationDate) > 48
-	 				? _("The user did not complete the activation. You need to resend an invitation, because the activation link has expired.")
-	 				: _("The user did not yet complete the activation. The activation link emailed to the user, expires in 48 hours. If needed, you can resend an invitation.")'
+	 				? ("The user did not complete the activation. You need to resend an invitation, because the activation link has expired." | translate)
+	 				: ("The user did not yet complete the activation. The activation link emailed to the user, expires in 48 hours. If needed, you can resend an invitation." | translate)'
 ></aps-message>
 <aps-button
 	*ngIf="hasManagePrivilege
 	 		&& hasLoginAsPermission
 	 		&& !isCurrentUser
 	 		&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
-	[label]='_("Login as ") + context.vars.selectedUser.givenName'
+	[label]='("Login as " | translate) + context.vars.selectedUser.givenName'
 ></aps-button>
 <aps-button
 	*ngIf="hasManagePrivilege
 	 			&& !isCurrentUser
 	 			&& ['ready', 'updating', 'locked', 'disabled'].includes(status)"
-	[label]='_("Reset password")'
+	[label]='"Reset password" | translate'
 ></aps-button>
 <aps-button
 	*ngIf="isCurrentUser && !context.vars.selectedUser.invitationDate"
-	[label]='_("Change Password")'
+	[label]='"Change Password" | translate'
 ></aps-button>
 <aps-button
 	*ngIf="!isAdmin || !isCurrentUser"
-	[label]='_("Delete")'
+	[label]='"Delete" | translate'
 ></aps-button>
 <aps-panel
-	[title]='_("User Settings")'
+	[title]='"User Settings" | translate'
 >
 	<aps-output
-		[label]='_("Name")'
+		[label]='"Name" | translate'
 		[value]="context.vars.selectedUser.fullName"
 	></aps-output>
 	<aps-output
-		[label]='_("Role")'
+		[label]='"Role" | translate'
 		[value]="isAdmin ? adminText : userText"
 	></aps-output>
 	<aps-output
-		[label]='_("Phone")'
+		[label]='"Phone" | translate'
 		[value]="context.vars.selectedUser.telWork"
 	></aps-output>
 	<aps-output
-		[label]='_("Mobile Phone")'
+		[label]='"Mobile Phone" | translate'
 		[value]="context.vars.selectedUser.telCell"
 	></aps-output>
 	<aps-output
-		[label]='_("Language")'
+		[label]='"Language" | translate'
 		[value]="englishText"
 	></aps-output>
 	<aps-output
 		[label]='isEmailHidden && isNotificationEmailHidden
-		 			? _("Email")
-		 			: _("Email (To Sign In)")'
+		 			? ("Email" | translate)
+		 			: ("Email (To Sign In)" | translate)'
 		[value]="context.vars.selectedUser.login"
 	></aps-output>
 	<aps-output
 		*ngIf="!isEmailHidden"
-		[label]='_("Personal Email")'
+		[label]='"Personal Email" | translate'
 		[value]="context.vars.selectedUser.email"
 	></aps-output>
 	<aps-output
 		*ngIf="!isNotificationEmailHidden"
-		[label]='_("Notification Email")'
+		[label]='"Notification Email" | translate'
 		[value]="context.vars.selectedUser.notificationEmail"
 	></aps-output>
 </aps-panel>
 <aps-panel
-	[title]='_("Postal Address")'
+	[title]='"Postal Address" | translate'
 >
 	<aps-output
 		[value]="context.vars.selectedUser.addressPostal.locality + ',' + context.vars.selectedUser.addressPostal.extendedAddress"
 	></aps-output>
 </aps-panel>
 <aps-panel
-	[title]='_("Login History")'
+	[title]='"Login History" | translate'
 >
 	<aps-output
-		[label]="loginTime ? _('Last accessed') : ''"
+		[label]="loginTime ? ('Last accessed' | translate) : ''"
 		[value]='loginTime ? loginTime :
 					(isCurrentUser
-					 	? _("It’s the first time you logged in.")
-					 	: _("This user has never logged in."))'
+					 	? ("It’s the first time you logged in." | translate)
+					 	: ("This user has never logged in." | translate))'
 	></aps-output>
 </aps-panel>

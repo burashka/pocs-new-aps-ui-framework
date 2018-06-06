@@ -1,49 +1,49 @@
 <aps-panel
-      [title]='_("Specify New User")'
+      [title]='"Specify New User" | translate'
       [id]="id"
 >
     <aps-textbox
-        [label]="_('First Name')"
-        [placeholder]='_("e.g.: John")'
+        [label]="'First Name' | translate"
+        [placeholder]='"e.g.: John" | translate'
         [(value)]="user.givenName"
     ></aps-textbox>
     <aps-textbox
-        [label]='_("Last Name")'
-        [placeholder]='_("e.g.: Smith")'
+        [label]='"Last Name" | translate'
+        [placeholder]='"e.g.: Smith" | translate'
         [(value)]="user.familyName"
     ></aps-textbox>
     <aps-select
-        [label]='_("Role Name")'
+        [label]='"Role Name" | translate'
         [(value)]="user.type"
         [options]="userTypes"
     ></aps-select>
     <aps-textbox
-        [label]='user.hasNotificationEmail ? _("Email Name") : _("Email (To Sign In)")'
-        [placeholder]='_("e.g.: john@mycompany.com")'
+        [label]='user.hasNotificationEmail ? ("Email Name" | translate) : ("Email (To Sign In)" | translate)'
+        [placeholder]='"e.g.: john@mycompany.com" | translate'
         [description]='user.hasNotificationEmail
-                            ? _("This email address will be used to sign in and receive notifications.")
-                            : _("You`ll use it to sign in.")'
+                            ? ("This email address will be used to sign in and receive notifications." | translate)
+                            : ("You`ll use it to sign in." | translate)'
         [(value)]="user.login"
     ></aps-textbox>
     <aps-textbox
         *ngIf="user.hasNotificationEmail"
-        [label]='_("Notification Email")'
-        [placeholder]='_("e.g.: john@mycompany.com")'
-        [description]='_("We`ll use this email for account and system updates.")'
+        [label]='"Notification Email" | translate'
+        [placeholder]='"e.g.: john@mycompany.com" | translate'
+        [description]='"We`ll use this email for account and system updates." | translate'
         [(value)]="user.notificationEmail"
     ></aps-textbox>
     <aps-checkbox
-        [description]='_("Use different emails to sign in and receive notifications.")'
-        [(checked)]="user.sendInvitation"
+        [description]='"Use different emails to sign in and receive notifications." | translate'
+        [(checked)]="user.hasNotificationEmail"
     ></aps-checkbox>
     <aps-button
         *ngIf="needAdd"
         (onClicked)="addUser()"
-        [label]='_("On More User")'
+        [label]='"On More User" | translate'
     ></aps-button>
     <aps-button
         *ngIf="needRemove"
         (onClicked)="removeUser(i)"
-        [label]='_("Remove User")'
+        [label]='"Remove User" | translate'
     ></aps-button>
 </aps-panel>

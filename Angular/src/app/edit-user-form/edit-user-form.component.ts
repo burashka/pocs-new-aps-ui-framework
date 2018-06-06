@@ -3,7 +3,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../users/user';
 import { UserType } from '../users/user-type';
-import { I18nService } from "@aps";
 
 interface Option {
   label: UserType;
@@ -27,12 +26,6 @@ export class EditUserFormComponent {
 
   @Output() onAddUser = new EventEmitter();
   @Output() onRemoveUser = new EventEmitter();
-
-  private _: (text: string) => string;
-
-  constructor(private i18n: I18nService) {
-    this._ = i18n._;
-  }
 
   addUser() {
     this.onAddUser.emit();

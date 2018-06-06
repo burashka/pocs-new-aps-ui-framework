@@ -1,7 +1,7 @@
 /* Example of View with forms */
 
 import { Component } from '@angular/core';
-import {ContextService, I18nService} from '@aps';
+import {ContextService} from '@aps';
 import { UsersService } from "../users.service";
 
 @Component({
@@ -12,18 +12,12 @@ export class EditViewComponent {
   services: string[] = [];
   sendInvitation = false;
 
-  private _: (text: string) => string;
-
   constructor(
       private context: ContextService,
-      private users: UsersService,
-      private i18n: I18nService
-  ) {
-      this._ = i18n._;
-  }
+      private users: UsersService
+  ) {}
 
   private servicesUpdate(status: boolean, serviceId: string, i: number){
-    console.log(status, serviceId, this.services.includes(serviceId));
     if (status) {
       this.services.push(serviceId);
     } else {

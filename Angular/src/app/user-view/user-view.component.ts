@@ -1,7 +1,7 @@
 /* Example of View with ajax */
 
 import { Component, OnInit } from '@angular/core';
-import { ContextService, ApscService, I18nService } from '@aps';
+import { ContextService, ApscService } from '@aps';
 import {UsersService} from "../users.service";
 
 function getStatus(user) {
@@ -63,11 +63,8 @@ export class UserViewComponent implements OnInit {
     constructor(
         private context: ContextService,
         private apsc: ApscService,
-        private i18n: I18nService,
         private users: UsersService
-    ) {
-        this._ = i18n._;
-    }
+    ) {}
 
     ngOnInit(){
         const { vars: {selectedUser}, user } = this.context;

@@ -2,26 +2,22 @@
   "name": "aps-poc",
   "version": "0.0.0",
   "scripts": {
+    "start": "ng serve --host 0.0.0.0 --port 4200",
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
-  "scripts": {
-    "start": "ng serve --host 0.0.0.0 --port 4200"
+    "lint": "ng lint"
   },
   "dependencies": {
-    "@angular/common": "^6.0.3",
-    "@angular/core": "^6.0.3",
-    "@angular/compiler": "^6.0.3",
     "@angular/animations": "^6.0.3",
+    "@angular/common": "^6.0.3",
+    "@angular/compiler": "^6.0.3",
+    "@angular/core": "^6.0.3",
     "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ngx-translate/core": "^10.0.2",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

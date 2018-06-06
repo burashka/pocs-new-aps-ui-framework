@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { ContextService } from './context.service';
 import { ApscService } from "./apsc.service";
-import { I18nService } from "./i18n.service";
 
 import { PanelComponent } from './ui/panel/panel.component';
 import { CheckboxComponent } from './ui/checkbox/checkbox.component';
@@ -37,8 +36,7 @@ import { OutputComponent } from "./ui/output/output.component";
   ],
   providers: [
     ContextService,
-    ApscService,
-    I18nService
+    ApscService
   ]
 })
 export class ApsModule {
