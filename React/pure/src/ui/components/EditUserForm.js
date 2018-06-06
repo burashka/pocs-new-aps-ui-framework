@@ -23,19 +23,13 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 			label={_("First Name")}
 			placeholder={_("e.g.: John")}
 			value={user.givenName}
-			onChange={(e) => {
-				user.givenName = e.target.value;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ...user, givenName: e.target.value })}
 		/>
 		<TextBox
 			label={_("Last Name")}
 			placeholder={_("e.g.: Smith")}
 			value={user.familyName}
-			onChange={(e) => {
-				user.familyName = e.target.value;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ...user, familyName: e.target.value })}
 		/>
 		<Select
 			label={_("Role Name")}
@@ -44,10 +38,7 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 				{label: "Admin", value: "Admin"}
 			]}
 			value={user.type}
-			onChange={(e) => {
-				user.type = e.target.value;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ...user, type: e.target.value })}
 		/>
 		<TextBox
 			label={hasNotificationEmail ? _("Email Name") : _("Email (To Sign In)")}
@@ -58,28 +49,19 @@ const EditUserForm = ({ user, needRemove, needAdd, onRemoveUser, onAddUser, onUs
 					: _("You'll use it to sign in.")
 			}
 			value={user.login}
-			onChange={(e) => {
-				user.login = e.target.value;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ...user, login: e.target.value })}
 		/>
 		{hasNotificationEmail && <TextBox
 			description={_("We'll use this email for account and system updates.")}
 			placeholder={_("e.g.: john@mycompany.com")}
 			label={_("Notification Email")}
 			value={user.notificationEmail}
-			onChange={(e) => {
-				user.notificationEmail = e.target.value;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ... user, notificationEmail: e.target.value })}
 		/>}
 		<CheckBox
 			description={_("Use different emails to sign in and receive notifications.")}
 			checked={hasNotificationEmail}
-			onChange={(e) => {
-				user.hasNotificationEmail = e.target.checked;
-				onUserChange(user);
-			}}
+			onChange={e => onUserChange({ ...user, hasNotificationEmail: e.target.checked })}
 		/>
 		{needAdd && <Button
 			bsStyle="primary"
