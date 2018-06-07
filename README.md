@@ -6,7 +6,8 @@ Times change and we're going to migrate from Dojo to a modern JavaScript Framewo
 We've created three proofs of concept (PoC): 
 1) Angular 
 2) Pure React
-3) React with Redux (React with library for managing application state). 
+3) React with Redux (Redux is popular library for managing application state)
+4) React with Mobx (Mobx is library for managing application state with more simple API)
 
 We will explain why exactly these options were chosen in the upcoming Design Review.
 
